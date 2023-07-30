@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--https://howtodoinjava.com/log4j2/log4j2-rollingfileappender-example/-->
+<!--https://stackoverflow.com/questions/21206993/very-simple-log4j2-xml-configuration-file-using-console-and-file-appender-->
+<Configuration status="INFO">
+    <Properties>
+        <Property name="LOG_DIR">./logs</Property>
+        <Property name="LOG_FILE_NAME">application</Property>
+        <Property name="LOG_FILE_MAX_SIZE">10MB</Property>
+        <Property name="LOG_FILE_MAX_COUNT">5</Property>
+        <Property name="LOG_FILE_DELETE_AFTER">P10D</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="сonsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+        </Console>
+        <Console name="scenarioConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - [%X{browser}] %m%n"/>
+        </Console>
+        <RollingFile
+                name="rollingFile"
+                fileName="${LOG_DIR}/${LOG_FILE_NAME}.log"
+                filePattern="${LOG_DIR}/${LOG_FILE_NAME}.%i.log.gz"
+                ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${LOG_FILE_MAX_SIZE}"/>
+            </Policies>
+            <DefaultRolloverStrategy max="${LOG_FILE_MAX_COUNT}">
+                <Delete basePath="${LOG_DIR}" maxDepth="2">
+                    <IfFileName glob="*/${LOG_FILE_NAME}.log.gz"/>
+                    <IfLastModified age="${LOG_FILE_DELETE_AFTER}"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+        <RollingFile
+                name="scenarioRollingFile"
+                fileName="${LOG_DIR}/${LOG_FILE_NAME}.log"
+                filePattern="${LOG_DIR}/${LOG_FILE_NAME}.%i.log.gz"
+                ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - [%X{browser}] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${LOG_FILE_MAX_SIZE}"/>
+            </Policies>
+            <DefaultRolloverStrategy max="${LOG_FILE_MAX_COUNT}">
+                <Delete basePath="${LOG_DIR}" maxDepth="2">
+                    <IfFileName glob="*/${LOG_FILE_NAME}.log.gz"/>
+                    <IfLastModified age="${LOG_FILE_DELETE_AFTER}"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+    <!--https://stackoverflow.com/questions/49635806/is-there-a-way-to-use-different-pattern-for-different-packages-when-using-log4j2-->
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="сonsole"/>
+            <AppenderRef ref="rollingFile"/>
+        </Root>
+        <!--https://logging.apache.org/log4j/2.x/manual/configuration.html-->
+        <Logger name="org.alenapech.qadiploma.scenario.impl" level="info" additivity="false">
+            <AppenderRef ref="scenarioConsole"/>
+            <AppenderRef ref="scenarioRollingFile"/>
+        </Logger>
+    </Loggers>
+</Configuration>
