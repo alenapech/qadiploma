@@ -3,7 +3,7 @@
 <!--https://stackoverflow.com/questions/21206993/very-simple-log4j2-xml-configuration-file-using-console-and-file-appender-->
 <Configuration status="INFO">
     <Properties>
-        <Property name="LOG_DIR">./logs</Property>
+        <Property name="LOG_DIR">./log</Property>
         <Property name="LOG_FILE_NAME">application</Property>
         <Property name="LOG_FILE_MAX_SIZE">10MB</Property>
         <Property name="LOG_FILE_MAX_COUNT">5</Property>
