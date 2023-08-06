@@ -1,6 +1,7 @@
 package org.alenapech.qadiploma.scenario;
 
 import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Playwright;
 import org.apache.logging.log4j.ThreadContext;
@@ -28,7 +29,8 @@ public abstract class AbstractScenario implements Scenario {
         try (Playwright playwright = Playwright.create()) {
             BrowserType browserType = getBrowserType(playwright);
             Browser browser = browserType.launch(launchOptions);
-            start(browser);
+            BrowserContext context = browser.newContext();
+            start(browser, context);
         }
     }
 
@@ -46,7 +48,7 @@ public abstract class AbstractScenario implements Scenario {
         }
     }
 
-    public abstract void start(Browser browser);
+    public abstract void start(Browser browser, BrowserContext context);
 
     @Override
     public String toString() {

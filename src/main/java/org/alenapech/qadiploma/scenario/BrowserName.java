@@ -1,5 +1,7 @@
 package org.alenapech.qadiploma.scenario;
 
+import org.alenapech.qadiploma.Constants;
+
 public enum BrowserName {
 
     CHROMIUM("chromium"),

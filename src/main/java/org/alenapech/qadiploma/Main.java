@@ -1,9 +1,9 @@
 package org.alenapech.qadiploma;
 
+import com.microsoft.playwright.*;
 import org.alenapech.qadiploma.scenario.BrowserName;
 import org.alenapech.qadiploma.scenario.Scenario;
 import org.alenapech.qadiploma.scenario.ScenarioFactory;
-import org.alenapech.qadiploma.util.ConcurrencyUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,17 +21,22 @@ public class Main implements Constants {
     public static void main(String[] args) {
         ScenarioFactory scenarioFactory = new ScenarioFactory();
         ExecutorService executorService = Executors.newWorkStealingPool();
-        for (Scenario scenario : scenarioFactory.getScenarios(getBrowserNames())) {
+        for (Scenario scenario : scenarioFactory.getScenarios(getBrowserNames(), getLaunchOptions())) {
             executorService.submit(scenario);
         }
-        ConcurrencyUtils.shutdownAndAwaitTermination(executorService);
+        ConcurrencyUtils.shutdownAndAwaitTermination(executorService); //TODO TBD we need to wait for the end of each thread
+    }
 
+    private static BrowserType.LaunchOptions getLaunchOptions() {
+        return null; //TODO uncomment in PROD
+//        return new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(100); //TODO remove in PROD
     }
 
     private static Set<BrowserName> getBrowserNames() {
         String browsersValue = System.getProperty(Variables.BROWSERS_VARIABLE); // get "browsers" variable from app startup
         if (StringUtils.isEmpty(browsersValue))
-            return Set.of(BrowserName.values());
+//            return Set.of(BrowserName.values()); //TODO uncomment in PROD
+            return Set.of(BrowserName.CHROMIUM); //TODO remove in PROD
         Set browserNames = Arrays.stream(browsersValue.split(Variables.BROWSERS_VARIABLE_DELIMITER))
                 .map(String::trim)
                 .map(BrowserName::fromValue)

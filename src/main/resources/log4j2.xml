@@ -56,7 +56,7 @@
     </Appenders>
     <!--https://stackoverflow.com/questions/49635806/is-there-a-way-to-use-different-pattern-for-different-packages-when-using-log4j2-->
     <Loggers>
-        <Root level="debug">
+        <Root level="info">
             <AppenderRef ref="сonsole"/>
             <AppenderRef ref="rollingFile"/>
         </Root>
