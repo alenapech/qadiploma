@@ -8,7 +8,9 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public interface LoginPageActions {
 
     default void Click_Login_Button(Page page) {
-        page.waitForTimeout(1500);//TODO: we should wait for RECAPTCHA somehow (it's not stable now without timeout)
+//        page.waitForTimeout(1500);
+//        page.locator("#google-reCaptcha div").nth(2)
+        page.waitForLoadState();
         Utils.assertThatVisibleAndClick(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Войти").setExact(true)));
     }
 

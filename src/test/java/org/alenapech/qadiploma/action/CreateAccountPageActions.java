@@ -8,7 +8,8 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public interface CreateAccountPageActions {
 
     default void Click_Account_Creation_Button(Page page) {
-        page.waitForTimeout(1500);//TODO: we should wait for RECAPTCHA somehow (it's not stable now without timout)
+//        page.waitForTimeout(1500);
+//        page.locator("#google-reCaptcha div").nth(2)
         Utils.assertThatVisibleAndClick(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Создать личный кабинет")));
     }
 

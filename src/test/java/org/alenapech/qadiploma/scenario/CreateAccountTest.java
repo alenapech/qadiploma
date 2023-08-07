@@ -71,4 +71,9 @@ public class CreateAccountTest extends AbstractTest implements HomePageActions, 
     void Check_Validation_for_Incorrect_Mail() {
         Check_Validation_for_Incorrect_Mail(page);
     }
+
+    @Override
+    String getReportName() {
+        return "create-account-test";
+    }
 }

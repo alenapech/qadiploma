@@ -35,10 +35,11 @@ public abstract class AbstractTest {
     void closeBrowser() {
         // Stop tracing and export it into a zip archive.
         context.tracing().stop(new Tracing.StopOptions()
-                .setPath(Paths.get("trace.zip"))); //TODO: we need to be able to store zip per scenario
+                .setPath(Paths.get("reports/" + getReportName() + ".zip")));
         context.close();
         playwright.close();
     }
 
+    abstract String getReportName();
 
 }

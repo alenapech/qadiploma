@@ -13,6 +13,7 @@ public interface HomePageActions {
 
     default void Open_Home_Page(Page page) {
         page.navigate("https://www.lcwaikiki.kz/ru-RU/KZ");
+        page.waitForLoadState();
         assertEquals("https://www.lcwaikiki.kz/ru-RU/KZ", page.url());
     }
 
@@ -42,11 +43,13 @@ public interface HomePageActions {
     default void Open_Account_Creation_Form(Page page) {
         Utils.assertThatVisibleAndHover(page.locator("a").filter(new Locator.FilterOptions().setHasText("Войти")).first());
         Utils.assertThatVisibleAndClick(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Создать личный кабинет")));
+        page.waitForLoadState();
         assertEquals("https://www.lcwaikiki.kz/ru-RU/KZ/register", page.url());
     }
 
     default void Open_Login_Form(Page page) {
         Utils.assertThatVisibleAndClick(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Войти")));
+        page.waitForLoadState();
         assertEquals("https://www.lcwaikiki.kz/ru-RU/KZ/login", page.url());
     }
 

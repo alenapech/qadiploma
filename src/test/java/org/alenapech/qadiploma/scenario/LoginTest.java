@@ -60,4 +60,9 @@ public class LoginTest extends AbstractTest implements HomePageActions, LoginPag
     void Check_Validation_for_Incorrect_Mail() {
         Check_Validation_for_Incorrect_Mail(page);
     }
+
+    @Override
+    String getReportName() {
+        return "login-test";
+    }
 }
