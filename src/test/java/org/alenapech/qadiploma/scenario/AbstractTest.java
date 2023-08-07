@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 //https://junit.org/junit5/docs/snapshot/user-guide/#writing-tests-display-name-generator
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+//https://stackoverflow.com/questions/54947645/junits-testmethodorder-annotation-not-working
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public abstract class AbstractTest {
     // Shared between all tests in the class.
     Playwright playwright;
@@ -33,7 +35,7 @@ public abstract class AbstractTest {
     void closeBrowser() {
         // Stop tracing and export it into a zip archive.
         context.tracing().stop(new Tracing.StopOptions()
-                .setPath(Paths.get("trace.zip")));
+                .setPath(Paths.get("trace.zip"))); //TODO: we need to be able to store zip per scenario
         context.close();
         playwright.close();
     }
