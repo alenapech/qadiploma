@@ -4,7 +4,11 @@ import com.microsoft.playwright.*;
 import org.alenapech.qadiploma.scenario.BrowserName;
 import org.alenapech.qadiploma.scenario.Scenario;
 import org.alenapech.qadiploma.scenario.ScenarioFactory;
+import org.alenapech.qadiploma.scenario.impl.CreateAccountScenario;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.platform.engine.discovery.DiscoverySelectors;
+import org.junit.platform.launcher.LauncherDiscoveryRequest;
+import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +21,25 @@ import java.util.stream.Collectors;
 public class Main implements Constants {
 
     private static Logger logger = LoggerFactory.getLogger(Main.class);
+
+//    public static void main(String[] args) {
+//        final LauncherDiscoveryRequest request =
+//                LauncherDiscoveryRequestBuilder.request()
+//                        .selectors(DiscoverySelectors.selectClass(СкуфеуФФ.class), DiscoverySelectors.selectClass(LoginTest.class))
+//                        .build();
+//
+//        final Launcher launcher = LauncherFactory.create();
+//        final SummaryGeneratingListener listener = new SummaryGeneratingListener();
+//
+//        launcher.registerTestExecutionListeners(listener);
+//        launcher.execute(request);
+//
+//        TestExecutionSummary summary = listener.getSummary();
+//        long testFoundCount = summary.getTestsFoundCount();
+//        List<Failure> failures = summary.getFailures();
+//        System.out.println("getTestsSucceededCount() - " + summary.getTestsSucceededCount());
+//        failures.forEach(failure -> System.out.println("failure - " + failure.getException()));
+//    }
 
     public static void main(String[] args) {
         ScenarioFactory scenarioFactory = new ScenarioFactory();

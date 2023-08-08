@@ -4,7 +4,7 @@ import org.alenapech.qadiploma.action.HomePageActions;
 import org.alenapech.qadiploma.action.LoginPageActions;
 import org.junit.jupiter.api.*;
 
-@DisplayName("Login Scenario")
+@DisplayName("Login Test")
 public class LoginTest extends AbstractTest implements HomePageActions, LoginPageActions {
 
     @Test

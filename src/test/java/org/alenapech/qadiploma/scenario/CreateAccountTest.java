@@ -4,7 +4,7 @@ import org.alenapech.qadiploma.action.CreateAccountPageActions;
 import org.alenapech.qadiploma.action.HomePageActions;
 import org.junit.jupiter.api.*;
 
-@DisplayName("Create Account Scenario")
+@DisplayName("Create Account Test")
 public class CreateAccountTest extends AbstractTest implements HomePageActions, CreateAccountPageActions {
     @Test
     @Order(1)
