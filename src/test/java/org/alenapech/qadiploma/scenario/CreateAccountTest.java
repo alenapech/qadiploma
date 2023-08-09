@@ -27,7 +27,7 @@ public class CreateAccountTest extends AbstractTest implements HomePageActions, 
     @Test
     @Order(4)
     void Open_Account_Creation_Form() {
-        Open_Account_Creation_Form(page);
+        Open_Account_Creation_Page(page);
     }
 
     @Test

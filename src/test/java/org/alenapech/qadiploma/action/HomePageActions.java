@@ -40,17 +40,30 @@ public interface HomePageActions {
         Utils.assertThatVisibleAndScroll(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Создать личный кабинет")));
     }
 
-    default void Open_Account_Creation_Form(Page page) {
+    default void Open_Account_Creation_Page(Page page) {
         Utils.assertThatVisibleAndHover(page.locator("a").filter(new Locator.FilterOptions().setHasText("Войти")).first());
         Utils.assertThatVisibleAndClick(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Создать личный кабинет")));
         page.waitForLoadState();
         assertEquals("https://www.lcwaikiki.kz/ru-RU/KZ/register", page.url());
     }
 
-    default void Open_Login_Form(Page page) {
+    default void Open_Login_Page(Page page) {
         Utils.assertThatVisibleAndClick(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Войти")));
         page.waitForLoadState();
         assertEquals("https://www.lcwaikiki.kz/ru-RU/KZ/login", page.url());
     }
 
+    default void Open_Search_Order_From_Header_Page(Page page) {
+        Utils.assertThatVisibleAndClick(page.locator("#header__container").getByRole(AriaRole.LINK
+                , new Locator.GetByRoleOptions().setName("Статус заказа")));
+        page.waitForLoadState();
+        assertEquals("https://www.lcwaikiki.kz/ru-RU/KZ/search-order", page.url());
+    }
+
+    default void Open_Search_Order_From_Footer_Page(Page page) {
+        Utils.assertThatVisibleAndClick(page.locator("#footer__container").getByRole(AriaRole.LINK
+                , new Locator.GetByRoleOptions().setName("Статус заказа")));
+        page.waitForLoadState();
+        assertEquals("https://www.lcwaikiki.kz/ru-RU/KZ/search-order", page.url());
+    }
 }

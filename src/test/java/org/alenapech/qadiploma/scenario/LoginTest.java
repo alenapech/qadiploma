@@ -28,7 +28,7 @@ public class LoginTest extends AbstractTest implements HomePageActions, LoginPag
     @Test
     @Order(4)
     void Open_Login_Form() {
-        Open_Login_Form(page);
+        Open_Login_Page(page);
     }
 
     @Test
