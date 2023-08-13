@@ -13,11 +13,11 @@ import java.nio.file.Paths;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 //https://stackoverflow.com/questions/54947645/junits-testmethodorder-annotation-not-working
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class AbstractTest {
+public abstract class AbstractTest {
     // Shared between all tests in the class.
-    Playwright playwright;
-    Browser browser;
-    BrowserContext context;
+    private Playwright playwright;
+    private Browser browser;
+    private BrowserContext context;
     Page page;
 
     Logger logger = LoggerFactory.getLogger(getClass());
@@ -25,7 +25,7 @@ public class AbstractTest {
     @BeforeAll
     void launchBrowser() {
         playwright = Playwright.create();
-        browser = playwright.chromium().launch();
+        browser = getBrowserType(playwright).launch();
         context = browser.newContext();
         page = context.newPage();
         // Start tracing before creating / navigating a page.
@@ -39,18 +39,18 @@ public class AbstractTest {
     void closeBrowser() {
         // Stop tracing and export it into a zip archive.
         context.tracing().stop(new Tracing.StopOptions()
-                .setPath(Paths.get("reports/" + getReportName() + ".zip")));
+                .setPath(Paths.get("reports/" + getBrowserType(playwright).name() + "/" + getReportName() + ".zip")));
         context.close();
         playwright.close();
     }
 
     @BeforeEach
     void logStartTest(TestInfo testInfo) {
-        logger.info("Start \"{}\" step", testInfo.getDisplayName());
+        logger.info("[{}] Start \"{}\" step", getBrowserType(playwright).name(), testInfo.getDisplayName());
     }
 
-    String getReportName() {
-        return "abstract-test";
-    }
+    abstract String getReportName();
+
+    protected abstract BrowserType getBrowserType(Playwright playwright);
 
 }

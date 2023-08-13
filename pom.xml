@@ -52,6 +52,13 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.9.2</version>
         </dependency>
+
+        <!--https://howtodoinjava.com/junit5/junit5-test-suites-examples/-->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-engine</artifactId>
+            <version>1.9.2</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
