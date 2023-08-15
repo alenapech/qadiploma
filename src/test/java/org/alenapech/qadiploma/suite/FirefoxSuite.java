@@ -1,12 +1,22 @@
 package org.alenapech.qadiploma.suite;
 
-import org.junit.platform.suite.api.SelectPackages;
+import org.alenapech.qadiploma.scenario.AbstractCheckOrderTest;
+import org.alenapech.qadiploma.scenario.FirefoxBrowserTest;
+import org.junit.jupiter.api.Nested;
 import org.junit.platform.suite.api.Suite;
 import org.junit.platform.suite.api.SuiteDisplayName;
 
-@SelectPackages("org.alenapech.qadiploma.scenario.firefox")
 @Suite
 @SuiteDisplayName("Firefox Suite")
 public class FirefoxSuite {
+    @Nested
+    class CheckOrderTest extends AbstractCheckOrderTest implements FirefoxBrowserTest {
+    }
+    @Nested
+    class CreateAccountTest extends AbstractCheckOrderTest implements FirefoxBrowserTest {
+    }
+    @Nested
+    class LoginTest extends AbstractCheckOrderTest implements FirefoxBrowserTest {
+    }
 
 }

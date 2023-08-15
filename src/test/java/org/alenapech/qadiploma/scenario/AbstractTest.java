@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 //https://stackoverflow.com/questions/54947645/junits-testmethodorder-annotation-not-working
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public abstract class AbstractTest {
+public abstract class AbstractTest implements BrowserTest {
     // Shared between all tests in the class.
     private Playwright playwright;
     private Browser browser;
@@ -50,7 +50,5 @@ public abstract class AbstractTest {
     }
 
     abstract String getReportName();
-
-    protected abstract BrowserType getBrowserType(Playwright playwright);
 
 }
