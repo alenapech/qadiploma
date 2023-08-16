@@ -4,11 +4,10 @@ import org.alenapech.qadiploma.scenario.AbstractCheckOrderTest;
 import org.alenapech.qadiploma.scenario.AbstractCreateAccountTest;
 import org.alenapech.qadiploma.scenario.AbstractLoginTest;
 import org.alenapech.qadiploma.scenario.ChromiumBrowserTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
-import org.junit.platform.suite.api.*;
 
-@Suite
-@SuiteDisplayName("Chromium Suite")
+@DisplayName("Chromium Suite")
 public class ChromiumSuite {
     @Nested
     class CheckOrderTest extends AbstractCheckOrderTest implements ChromiumBrowserTest {}

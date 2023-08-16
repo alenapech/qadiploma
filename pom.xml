@@ -6,7 +6,7 @@
 
     <groupId>org.alenapech</groupId>
     <artifactId>qadiploma</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -52,42 +52,12 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.9.2</version>
         </dependency>
-
-        <!--https://howtodoinjava.com/junit5/junit5-test-suites-examples/-->
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-suite-engine</artifactId>
-            <version>1.9.2</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
+            <!--https://stackoverflow.com/questions/97640/make-maven-to-copy-dependencies-into-target-lib-->
+            <!--get all dependency (jars) to use in tests-->
             <plugin>
-                <!--https://javahelps.com/how-to-create-a-fat-jar-using-maven-->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.4.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.alenapech.qadiploma.Main</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <!--https://stackoverflow.com/questions/97640/make-maven-to-copy-dependencies-into-target-lib-->
-                <!--get all dependency (jars) to use in tests-->
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
@@ -101,6 +71,92 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!--https://www.baeldung.com/maven-copy-files-->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-libs</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/${project.artifactId}-${project.version}/lib</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/target/lib</directory>
+                                    <includes>
+                                        <include>*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>copy-app-startup</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/${project.artifactId}-${project.version}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/app-startup</directory>
+                                    <includes>
+                                        <include>*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>copy-test-classes</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/${project.artifactId}-${project.version}/test-classes</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/target/test-classes</directory>
+                                    <includes>
+                                        <include>**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--https://roytuts.com/zip-file-using-maven-assembly-plugin/-->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>assembly.xml</descriptor>
+                    </descriptors>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>zip-build</id> <!-- this is used for inheritance merges -->
+                        <phase>install</phase> <!-- append to the packaging phase. -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
