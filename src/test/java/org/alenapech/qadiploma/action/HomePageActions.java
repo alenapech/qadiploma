@@ -102,4 +102,14 @@ public interface HomePageActions {
         page.waitForLoadState();
         assertEquals("https://www.lcwaikiki.kz/ru-RU/KZ/mybag", page.url());
     }
+
+    default void Check_Promo_Existence(Page page) {
+        Utils.assertThatVisibleAndScroll(page.locator("div:nth-child(2) > .full-width-slider__link").first());
+    }
+
+    default void Open_Contact_Page(Page page) {
+        Utils.assertThatVisibleAndClick(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Свяжитесь с нами")));
+        Utils.assertThatVisibleAndScroll(page.getByText("Юридический адрес компании LC Waikiki:"));
+    }
+
 }
