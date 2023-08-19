@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Search Product Test")
+@DisplayName("Add Product To My Bag Test")
 public abstract class AbstractAddProductToMyBagTest extends AbstractTest implements HomePageActions, MyBagPageActions, ProductPageActions {
 
     @Test

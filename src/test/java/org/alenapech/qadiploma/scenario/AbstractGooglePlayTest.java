@@ -1,12 +1,13 @@
 package org.alenapech.qadiploma.scenario;
 
 import org.alenapech.qadiploma.action.HomePageActions;
+import org.alenapech.qadiploma.action.LoginPageActions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Contact Page Test")
-public abstract class AbstractContactPageTest extends AbstractTest implements HomePageActions {
+@DisplayName("Google Play Test")
+public abstract class AbstractGooglePlayTest extends AbstractTest implements HomePageActions {
 
     @Test
     @Order(1)
@@ -28,12 +29,12 @@ public abstract class AbstractContactPageTest extends AbstractTest implements Ho
 
     @Test
     @Order(30)
-    void Open_Contact_Page() {
-        Open_Contact_Page(page);
+    void Open_Google_Play_Store_Page() {
+        Open_Google_Play_Store_Page(page);
     }
 
     @Override
     String getReportName() {
-        return "contact-page-test";
+        return "google-play-test";
     }
 }

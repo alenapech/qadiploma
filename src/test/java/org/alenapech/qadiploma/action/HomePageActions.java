@@ -2,7 +2,6 @@ package org.alenapech.qadiploma.action;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.assertions.LocatorAssertions;
 import com.microsoft.playwright.options.AriaRole;
 
 import java.util.regex.Pattern;
@@ -110,6 +109,18 @@ public interface HomePageActions {
     default void Open_Contact_Page(Page page) {
         Utils.assertThatVisibleAndClick(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Свяжитесь с нами")));
         Utils.assertThatVisibleAndScroll(page.getByText("Юридический адрес компании LC Waikiki:"));
+    }
+
+    default void Open_Google_Play_Store_Page(Page page) {
+        Page page1 = Utils.assertThatVisibleAndClickOpenningNewPage(page.locator(".col-lg-6 > div > a:nth-child(3)").first(), page);
+        assertEquals("https://play.google.com/store/apps/details?id=com.lcwaikiki.global", page1.url());
+        Utils.assertThatVisibleAndScroll(page1.getByText(Pattern.compile("LC Waikiki")).first());
+    }
+
+    default void Open_App_Store_Page(Page page) {
+        Page page1 = Utils.assertThatVisibleAndClickOpenningNewPage(page.locator(".col-lg-6 > div > a").first(), page);
+        assertEquals("https://apps.apple.com/us/app/lc-waikiki-kz/id1615048110", page1.url());
+        Utils.assertThatVisibleAndScroll(page1.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(Pattern.compile("LC Waikiki"))));
     }
 
 }

@@ -1,6 +1,7 @@
 package org.alenapech.qadiploma.action;
 
 import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.Assumptions;
 import org.opentest4j.AssertionFailedError;
 
@@ -16,6 +17,12 @@ public class Utils {
     public static void assertThatVisibleAndClick(Locator locator) {
         assertThat(locator).isVisible();
         locator.click();
+    }
+
+    public static Page assertThatVisibleAndClickOpenningNewPage(Locator locator, Page page) {
+        assertThat(locator).isVisible();
+        locator.scrollIntoViewIfNeeded();
+        return page.waitForPopup(() -> locator.click());
     }
 
     public static void assertThatVisibleAndFill(Locator locator, String value) {

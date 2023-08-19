@@ -5,8 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Contact Page Test")
-public abstract class AbstractContactPageTest extends AbstractTest implements HomePageActions {
+@DisplayName("App Store Test")
+public abstract class AbstractAppStoreTest extends AbstractTest implements HomePageActions {
 
     @Test
     @Order(1)
@@ -28,12 +28,12 @@ public abstract class AbstractContactPageTest extends AbstractTest implements Ho
 
     @Test
     @Order(30)
-    void Open_Contact_Page() {
-        Open_Contact_Page(page);
+    void Open_App_Store_Page() {
+        Open_App_Store_Page(page);
     }
 
     @Override
     String getReportName() {
-        return "contact-page-test";
+        return "app-store-test";
     }
 }

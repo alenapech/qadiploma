@@ -1,9 +1,11 @@
 package org.alenapech.qadiploma.scenario;
 
 import org.alenapech.qadiploma.action.HomePageActions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Check Promo Existence Test")
 public abstract class AbstractCheckPromoExistenceTest extends AbstractTest implements HomePageActions {
 
     @Test
