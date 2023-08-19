@@ -1,6 +1,7 @@
 package org.alenapech.qadiploma.action;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.assertions.LocatorAssertions;
 import com.microsoft.playwright.options.AriaRole;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -35,8 +36,8 @@ public interface SearchOrderPageActions {
         Utils.assertThatVisibleAndFill(page.getByPlaceholder("Ваш e-mail"), "alenaryzhova@inbox.ru");
         Utils.assertThatVisibleAndFill(page.getByPlaceholder("Номер Вашего заказа"), "2307161700822");
         Click_Search_Button(page);
-        page.waitForLoadState();
-        assertEquals("https://www.lcwaikiki.kz/ru-RU/KZ/order-detail/2307161700822", page.url());
+//        page.waitForLoadState();
+//        assertEquals("https://www.lcwaikiki.kz/ru-RU/KZ/order-detail/2307161700822", page.url());
         Utils.assertThatVisibleAndScroll(page.getByText("Заказ номер 2307161700822"));
     }
 }

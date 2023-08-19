@@ -52,6 +52,14 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.9.2</version>
         </dependency>
+
+        <!--https://www.baeldung.com/java-junit-test-suite-->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>1.9.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

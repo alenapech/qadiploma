@@ -16,67 +16,73 @@ public abstract class AbstractCheckOrderTest extends AbstractTest implements Hom
     }
 
     @Test
-    @Order(2)
-    void Close_Popup_if_Needed() {
-        Close_Popup_if_Needed(page);
+    @Order(10)
+    void Close_Notification_Popup_if_Needed() {
+        Close_Notification_Popup_if_Needed(page);
     }
 
     @Test
-    @Order(3)
+    @Order(20)
+    void Close_Fortune_Popup_if_Needed() {
+        Close_Fortune_Popup_if_Needed(page);
+    }
+
+    @Test
+    @Order(30)
     void Open_Search_Order_From_Header_Page() {
         Open_Search_Order_From_Header_Page(page);
     }
 
     @Test
-    @Order(4)
+    @Order(40)
     void Open_Home_Page_Second_Time() {
         Open_Home_Page(page);
     }
 
     @Test
-    @Order(5)
-    void Close_Popup_if_Needed_Second_Time() {
-        Close_Popup_if_Needed(page);
+    @Order(50)
+    void Close_Fortune_Popup_if_Needed_Second_Time() {
+        Close_Fortune_Popup_if_Needed(page);
     }
 
     @Test
-    @Order(6)
+    @Order(60)
     void Open_Search_Order_From_Footer_Page() {
         Open_Search_Order_From_Footer_Page(page);
     }
 
     @Test
-    @Order(7)
+    @Order(70)
     void Click_Search_Button() {
         Click_Search_Button(page);
     }
 
     @Test
-    @Order(8)
+    @Order(80)
     void Check_Validation_for_Empty_Mail() {
         Check_Validation_for_Empty_Mail(page);
     }
 
     @Test
-    @Order(9)
+    @Order(90)
     void Check_Validation_for_Empty_Order() {
         Check_Validation_for_Empty_Order(page);
     }
 
     @Test
-    @Order(10)
+    @Order(100)
     void Check_Validation_for_Incorrect_Mail() {
         Check_Validation_for_Incorrect_Mail(page);
     }
 
     @Test
-    @Order(11)
+    @Order(110)
     void Check_Validation_for_Incorrect_Order() {
         Check_Validation_for_Incorrect_Order(page);
     }
 
     @Test
-    @Order(12)
+    @Order(120)
     void Open_Order_Details_Page() {
         Open_Order_Details_Page(page);
     }
