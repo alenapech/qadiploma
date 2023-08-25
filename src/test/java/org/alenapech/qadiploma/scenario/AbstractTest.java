@@ -21,7 +21,7 @@ public abstract class AbstractTest implements BrowserTest {
     Page page;
 
     Logger logger = LoggerFactory.getLogger(getClass());
-    private static final int DEFAULT_TIMEOUT = 120000;
+    private static final int DEFAULT_TIMEOUT = 40000;
 
     @BeforeAll
     void launchBrowser() {
@@ -29,7 +29,10 @@ public abstract class AbstractTest implements BrowserTest {
         browser = getBrowserType(playwright).launch();
         context = browser.newContext();
         context.setDefaultTimeout(DEFAULT_TIMEOUT);
+        context.setDefaultNavigationTimeout(DEFAULT_TIMEOUT);
         page = context.newPage();
+        page.setDefaultNavigationTimeout(DEFAULT_TIMEOUT);
+        page.setDefaultTimeout(DEFAULT_TIMEOUT);
         // Start tracing before creating / navigating a page.
         context.tracing().start(new Tracing.StartOptions()
                 .setScreenshots(true)

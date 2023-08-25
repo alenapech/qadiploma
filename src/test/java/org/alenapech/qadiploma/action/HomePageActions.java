@@ -2,19 +2,23 @@ package org.alenapech.qadiploma.action;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.TimeoutError;
 import com.microsoft.playwright.options.AriaRole;
 
 import java.util.regex.Pattern;
 
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public interface HomePageActions {
 
     default void Open_Home_Page(Page page) {
-        page.navigate("https://www.lcwaikiki.kz/ru-RU/KZ");
-        page.waitForLoadState();
-        assertThat(page.locator("a").filter(new Locator.FilterOptions().setHasText("Войти")).first()).isVisible();
+        try {
+            page.navigate("https://www.lcwaikiki.kz/ru-RU/KZ");
+        } catch (TimeoutError e) {
+            // just WA to avoid random TimeoutError, like https://github.com/microsoft/playwright/issues/12182
+//            logger.warn("TimeoutError: {}", e);
+        }
+        Utils.assertThatVisibleAndScroll(page.locator("a").filter(new Locator.FilterOptions().setHasText("Войти")).first());
     }
 
     default void Close_Fortune_Popup_if_Needed(Page page) {
@@ -121,6 +125,16 @@ public interface HomePageActions {
         Page page1 = Utils.assertThatVisibleAndClickOpenningNewPage(page.locator(".col-lg-6 > div > a").first(), page);
         assertEquals("https://apps.apple.com/us/app/lc-waikiki-kz/id1615048110", page1.url());
         Utils.assertThatVisibleAndScroll(page1.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(Pattern.compile("LC Waikiki"))));
+    }
+
+    default void Open_Global_Page(Page page) {
+        Utils.assertThatVisibleAndClick(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Казахстан")));
+        Utils.assertThatVisibleAndScroll(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Italia | Italy")));
+    }
+
+    default void Accept_Italy_Location(Page page) {
+        Utils.assertThatVisibleAndClick(page.getByText("Continue with lcwaikiki.it/en-US/IT"));
+        Utils.assertThatVisibleAndScroll(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Outlet").setExact(true)));
     }
 
 }
