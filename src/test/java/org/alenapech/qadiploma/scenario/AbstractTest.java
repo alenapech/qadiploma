@@ -26,7 +26,7 @@ public abstract class AbstractTest implements BrowserTest {
     @BeforeAll
     void launchBrowser() {
         playwright = Playwright.create();
-        browser = getBrowserType(playwright).launch();
+        browser = getBrowserType(playwright).launch(new BrowserType.LaunchOptions().setTimeout(DEFAULT_TIMEOUT));
         context = browser.newContext();
         context.setDefaultTimeout(DEFAULT_TIMEOUT);
         context.setDefaultNavigationTimeout(DEFAULT_TIMEOUT);
